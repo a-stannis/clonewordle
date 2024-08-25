@@ -138,7 +138,9 @@ body {
 
 #popup {
   display: none;
-  position: fixed; /* Stay in place */
+  position: absolute; /* Stay in place */
+  top: 50%;
+  align-self: center;
   z-index: 1; /* Sit on top */
   left: 0;
   top: 0;
