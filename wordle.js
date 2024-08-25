@@ -26,16 +26,16 @@ function reset() {
 
 async function fetchData() {
     try {
-        const shortlistResponse = await fetch('https://raw.githubusercontent.com/a-stannis/clonewordle/main/wordle%20short%20list.json');
+        const shortlistResponse = await fetch('wordle short list.json');
         if (!shortlistResponse.ok) {
-            throw new Error(`Shortlist file not found or server error: ${shortlistResponse.statusText}`);
+            throw new Error('Network response was not ok');
         }
         const shortlistData = await shortlistResponse.json();
         shortlistarr = shortlistData.map(item => item.word);
 
-        const longlistResponse = await fetch('https://raw.githubusercontent.com/a-stannis/clonewordle/main/wordle%20short%20list.json');
+        const longlistResponse = await fetch('wordle long list.json');
         if (!longlistResponse.ok) {
-            throw new Error(`Longlist file not found or server error: ${longlistResponse.statusText}`);
+            throw new Error('Network response was not ok');
         }
         const longlistData = await longlistResponse.json();
         longlistarr = longlistData.map(item => item.word);
@@ -43,10 +43,8 @@ async function fetchData() {
         game(); // Start the game after data is fetched
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
-        alert('Failed to load game data. Please check your connection or try again later.');
     }
 }
-
 
 function selectRandomWord() {
     if (shortlistarr.length > 0) {
