@@ -137,28 +137,31 @@ body {
 
 
 #popup {
-  display: none;
-  position: absolute; /* Stay in place */
-  top: 50%;
-  align-self: center;
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
-}
-
-.popup-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  color: #121213;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-  max-width: 500px;
-}
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed positioning relative to the viewport */
+    width: 700px;
+    top: 50%; /* Center vertically within the viewport */
+    left: 50%; /* Center horizontally within the viewport */
+    transform: translate(-50%, -50%); /* Offset by 50% of its size to truly center */
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background for the overlay */
+    z-index: 1000; /* Ensure it's above other elements */
+    align-content: center;
+  }
+  
+  .popup-content {
+    background-color: #fefefe;
+    padding: 20px;
+    font-size: 20px;
+    color: #121213;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 500px;
+    margin: 0 auto; /* Ensure it's centered within the popup container */
+    border-radius: 5px;
+    box-sizing: border-box;
+    overflow-wrap: break-word; /* Handle long text */
+  }
+  
 
 .close {
   color: #aaa;
@@ -200,7 +203,6 @@ body {
 
 @media (max-width: 400px) {
   .temporary-popup {
-    font-size: 14px;
-    padding: 8px 16px;
+    top: 60%
   }
 }
