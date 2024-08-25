@@ -26,14 +26,14 @@ function reset() {
 
 async function fetchData() {
     try {
-        const shortlistResponse = await fetch('wordleshortlist.json');
+        const shortlistResponse = await fetch('wordle short list.JSON');
         if (!shortlistResponse.ok) {
             throw new Error('Network response was not ok both');
         }
         const shortlistData = await shortlistResponse.json();
         shortlistarr = shortlistData.map(item => item.word);
 
-        const longlistResponse = await fetch('wordlelonglist.json');
+        const longlistResponse = await fetch('wordle long list.JSON');
         if (!longlistResponse.ok) {
             throw new Error('Network response was not ok one');
         }
