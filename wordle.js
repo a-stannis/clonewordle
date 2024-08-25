@@ -1,20 +1,49 @@
 let win = false;
 let turnnumber = 0;
-let userInput;
+let userInput= '';
 let abletorecieve = true;
 let shortlistarr = [];
 let longlistarr = [];
 let solution = [];
+
+function addEventListeners() {
+  const submitButton = document.getElementById('submitGuess');
+  const guessInput = document.getElementById('guessInput');
+
+  submitButton.addEventListener('click', handleSubmit);
+  guessInput.addEventListener('keydown', handleEnterKey);
+}
+
+function removeEventListeners() {
+  const submitButton = document.getElementById('submitGuess');
+  const guessInput = document.getElementById('guessInput');
+
+  submitButton.removeEventListener('click', handleSubmit);
+  guessInput.removeEventListener('keydown', handleEnterKey);
+}
+
+function handleSubmit() {
+  if (abletorecieve) {
+      recieve();
+      if (turnnumber < 6 && !win) {
+          turn();
+      }
+  }
+}
+
+function handleEnterKey(event) {
+  if (event.key === 'Enter') {
+      document.getElementById('submitGuess').click();
+  }
+}
 
 function reset() {
   win = false;
   turnnumber = 0;
   userInput = '';
   abletorecieve = true;
-  shortlistarr = [];
-  longlistarr = [];
   solution = [];
-  
+  document.getElementById('guessInput').value = '';
   for (let i = 0; i < 6; i++) {
       for (let k = 1; k < 6; k++) {
           let square = document.getElementById(`square${i}${k}`);
@@ -22,6 +51,7 @@ function reset() {
           square.textContent = '';
       }
   }
+  removeEventListeners();
 }
 
 async function fetchData() {
@@ -39,7 +69,7 @@ async function fetchData() {
         }
         const longlistData = await longlistResponse.json();
         longlistarr = longlistData.map(item => item.word);
-
+        reset();
         game(); // Start the game after data is fetched
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
@@ -63,20 +93,7 @@ function game() {
         return;
     }
 
-    document.getElementById('submitGuess').addEventListener('click', function() {
-        if (abletorecieve) {
-            recieve();
-            if (turnnumber < 6 && !win) {
-                turn();
-            }
-        }
-    });
-
-    document.getElementById('guessInput').addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-            document.getElementById('submitGuess').click();
-        }
-    });
+    addEventListeners();
 }
 
 function recieve() {
@@ -98,21 +115,20 @@ function turn() {
 
     turnnumber++;
     let guessResult = [];
-    let solutionCopy = [...solution]; // Create a copy of the solution for processing
+    let solutionCopy = [...solution];
 
     for (let i = 0; i < 5; i++) {
         let square = document.getElementById(`square${turnnumber - 1}${i + 1}`);
         if (userInput[i] === solution[i]) {
             guessResult.push("V");
             square.textContent = userInput[i];
-            square.classList.add('green');  // Green for correct letter and position
-            solutionCopy[i] = null; // Mark this letter as matched
+            square.classList.add('green');
+            solutionCopy[i] = null;
         } else {
-            guessResult.push(null); // Placeholder for second pass
+            guessResult.push(null);
         }
     }
 
-    // Second pass: Check for correct letters in wrong positions
     for (let i = 0; i < 5; i++) {
         if (guessResult[i] === null) { // Only process non-correct letters
             let square = document.getElementById(`square${turnnumber - 1}${i + 1}`);
@@ -157,12 +173,11 @@ const closePopupButton = document.getElementById('closePopup');
 
 function showPopup() {
     popup.style.display = 'block';
-    reset();
-    fetchData();
 }
 
 function hidePopup() {
   abletorecieve = true;
+  fetchData();
     popup.style.display = 'none';
 }
 
