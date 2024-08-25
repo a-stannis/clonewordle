@@ -30,7 +30,7 @@ body {
   width: 60px;
   height: 60px;
   border: 2px solid #3a3a3c;
-  display: flex;
+  display: grid;
   align-items: center;
   justify-content: center;
   font-size: 24px;
@@ -74,6 +74,15 @@ body {
   justify-items: center;
 }
 
+.big-wrapper {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-gap: 10px;
+  justify-items: center;
+}
+
+
+
 /* Ensure input and button are centered below the grid */
 #guessInput {
   width: 200px;
@@ -111,14 +120,6 @@ body {
     height: 50px;
     font-size: 20px;
   }
-  
-  @media (max-width: 600px) {
-    .temporary-popup {
-        bottom: 10px;
-        padding: 8px 16px;
-        font-size: 14px;
-    }
-}
 
   .row {
     grid-gap: 5px;
@@ -171,21 +172,21 @@ body {
   cursor: pointer;
 }
 
+
 .temporary-popup {
   display: none; /* Hidden by default */
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: fixed; /* Absolute positioning */
+  top: 90%; /* Center vertically within its parent */
+  left: 50%; /* Center horizontally within its parent */
+  transform: translate(-50%, -50%); /* Offset by 50% of its size to truly center */
   background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  z-index: 1000; /* Make sure it's above other elements */
+  z-index: 1; /* Make sure it's above other elements */
   font-size: 16px;
   animation: fadeInOut 2s forwards; /* Animate in and out */
-   -webkit-transition: opacity 0.5s ease-in-out;
 }
 
 @keyframes fadeInOut {
@@ -193,4 +194,11 @@ body {
   10% { opacity: 1; }
   90% { opacity: 1; }
   100% { opacity: 0; }
+}
+
+@media (max-width: 400px) {
+  .temporary-popup {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
 }
