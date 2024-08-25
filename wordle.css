@@ -1,0 +1,164 @@
+/* Base styling for the body */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #121213;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  color: #fff;
+}
+
+.fullgrid {
+  display: grid;
+  grid-template-rows: repeat(6, auto) auto;
+  grid-gap: 10px;
+  padding: 5px;
+  justify-items: center;
+}
+
+/* Styling for the wordle grid rows */
+.row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+}
+
+/* Styling for each square in the grid */
+.grid-square {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #3a3a3c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #121213;
+  color: #d7dadc;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: 4px;
+}
+
+/* Styling for correct letter in the correct position */
+.grid-square.green {
+  background-color: #6aaa64;
+  color: #fff;
+}
+
+/* Styling for correct letter but in the wrong position */
+.grid-square.yellow {
+  background-color: #c9b458;
+  color: #fff;
+}
+
+/* Styling for incorrect letters */
+.grid-square.grey {
+  background-color: #3a3a3c;
+  color: #d7dadc;
+}
+
+/* Adding some hover effects for interactivity */
+.grid-square:hover {
+  border-color: #888;
+  cursor: pointer;
+}
+
+/* Styling for the input-wrapper */
+.input-wrapper {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
+  justify-items: center;
+}
+
+/* Ensure input and button are centered below the grid */
+#guessInput {
+  width: 200px;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 18px;
+  border: 2px solid #3a3a3c;
+  border-radius: 4px;
+  background-color: #121213;
+  color: #ffffff;
+}
+
+/* Styling for the submit button */
+#submitGuess {
+  height: 40px;
+  padding: 0 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  background-color: #4a8e4a;
+  transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+#submitGuess:hover {
+  background-color: #6aaa64;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 400px) {
+  .grid-square {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+
+  .row {
+    grid-gap: 5px;
+  }
+
+  #guessInput {
+    width: 150px;
+    font-size: 16px;
+  }
+
+  #submitGuess {
+    font-size: 16px;
+  }
+}
+
+
+#popup {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+}
+
+.popup-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  color: #121213;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  max-width: 500px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
