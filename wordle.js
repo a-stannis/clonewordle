@@ -87,12 +87,12 @@ function recieve() {
 function turn() {
     document.getElementById('guessInput').value = '';
     if (userInput.length !== 5) {
-        console.log("Invalid length. Try again.");
-        abletorecieve = true;
+      showTemporaryPopup("invalid length, try again!")
+      abletorecieve = true;
         return;
     } else if (!longlistarr.includes(userInput)) {
-        console.log("Invalid word. Try again.");
-        abletorecieve = true;
+      showTemporaryPopup("Invalid word. Try again.");
+      abletorecieve = true;
         return;
     }
 
@@ -145,6 +145,16 @@ function turn() {
 const popup = document.getElementById('popup');
 const closePopupButton = document.getElementById('closePopup');
 
+  function showTemporaryPopup(message, duration = 2000) {
+    const popup = document.getElementById('temporaryPopup');
+    const popupText = document.getElementById('temporaryPopupText');
+    popupText.textContent = message;
+    popup.style.display = 'block'; // Show the popup
+    setTimeout(() => {
+        popup.style.display = 'none';
+    }, duration);
+}
+
 function showPopup() {
     popup.style.display = 'block';
     reset();
@@ -152,6 +162,7 @@ function showPopup() {
 }
 
 function hidePopup() {
+  abletorecieve = true;
     popup.style.display = 'none';
 }
 
